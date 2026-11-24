@@ -1,0 +1,676 @@
+/* FinancialSuite navy & gold palette layered on top of the financial-navy PrimeReact theme. */
+:root {
+    /* "Ledger" palette: deep navy for trust and stability, a restrained gold accent for value. */
+    --app-brand-50: #f4f7fb;
+    --app-brand-100: #e3eaf5;
+    --app-brand-200: #c8d5ea;
+    --app-brand-300: #9fb4d6;
+    --app-brand-500: #2b5d9b;
+    --app-brand-700: #1d4177;
+    --app-brand-900: #132b4f;
+    --app-gold-100: #f8f0d8;
+    --app-gold-300: #e6cf86;
+    --app-gold-500: #c9a227;
+    --app-gold-700: #8a6d12;
+    --app-surface: rgba(255, 255, 255, 0.94);
+    --app-shadow: 0 8px 28px rgba(19, 43, 79, 0.1), 0 2px 5px rgba(19, 43, 79, 0.08);
+    --app-button-shadow: 0 4px 12px rgba(19, 43, 79, 0.2), 0 1px 3px rgba(19, 43, 79, 0.14);
+}
+
+/* Inset so the toolbar lines up inside the table card's rounded corners rather than flush with its edges. */
+.page-toolbar {
+    padding: 0 0.75rem;
+}
+
+/* Buttons sitting on the page background (outside cards and dialogs) get lifted off it. */
+.page-toolbar .p-button {
+    box-shadow: var(--app-button-shadow);
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.2s, color 0.2s, border-color 0.2s;
+
+    &:not(:disabled):hover {
+        transform: translateY(-1px);
+        box-shadow: 0 6px 16px rgba(19, 43, 79, 0.28), 0 2px 4px rgba(19, 43, 79, 0.18);
+    }
+
+    &:focus {
+        box-shadow: var(--focus-ring), var(--app-button-shadow);
+    }
+}
+
+body {
+    background-color: var(--app-brand-50);
+    background-image: url('/images/pattern.svg'), linear-gradient(160deg, #f4f7fb 0%, #eaf0f8 55%, #faf7ee 100%);
+    background-attachment: fixed;
+}
+
+.card {
+    background: var(--app-surface);
+    border: 1px solid var(--app-brand-100);
+    border-radius: $borderRadius;
+    box-shadow: var(--app-shadow);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Topbar */
+.layout-topbar {
+    background-color: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--app-brand-100);
+    box-shadow: none;
+
+    .layout-topbar-logo {
+        gap: 0.5rem;
+        color: var(--app-brand-900);
+        font-weight: 600;
+        font-size: 1.35rem;
+    }
+
+    .topbar-user {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.4rem 0.9rem;
+        border-radius: 2rem;
+        background: var(--app-brand-100);
+        color: var(--app-brand-900);
+        font-size: 0.9rem;
+        max-width: 18rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+}
+
+@media (max-width: 991px) {
+    .layout-topbar .topbar-user {
+        margin-bottom: 0.5rem;
+        max-width: 100%;
+    }
+}
+
+/* Sidebar */
+.layout-sidebar {
+    background: var(--app-surface);
+    border: 1px solid var(--app-brand-100);
+    box-shadow: var(--app-shadow);
+}
+
+.layout-menu {
+    .layout-root-menuitem > .layout-menuitem-root-text {
+        color: var(--app-brand-700);
+        font-size: 0.75rem;
+        letter-spacing: 0.06em;
+    }
+
+    ul a {
+        color: var(--text-color);
+
+        .layout-menuitem-icon {
+            color: var(--app-brand-500);
+        }
+
+        &:hover {
+            background-color: var(--app-brand-50);
+        }
+
+        &.active-route {
+            background-color: var(--app-brand-100);
+            color: var(--app-brand-900);
+
+            .layout-menuitem-icon {
+                color: var(--app-brand-700);
+            }
+        }
+    }
+}
+
+/* Page header */
+.page-header {
+    margin-bottom: 1.5rem;
+
+    h2 {
+        color: var(--app-brand-900);
+        font-weight: 600;
+        line-height: 1.2;
+    }
+
+    .page-header-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 3rem;
+        height: 3rem;
+        border-radius: 14px;
+        background: var(--app-brand-100);
+        color: var(--app-brand-700);
+        flex-shrink: 0;
+
+        i {
+            font-size: 1.35rem;
+        }
+    }
+}
+
+/* Tables */
+.p-datatable {
+    .p-datatable-header {
+        background: transparent;
+        border-top: 0;
+        padding: 0 0 1rem 0;
+    }
+
+    .p-datatable-thead > tr > th {
+        background: var(--app-brand-50);
+        color: var(--app-brand-900);
+    }
+
+    .p-paginator {
+        background: transparent;
+    }
+}
+
+/* Disabled form fields hold a value the page fixed, so show it solid on gray rather than faded like a placeholder. */
+.field {
+    .p-disabled,
+    .p-component:disabled {
+        opacity: 1;
+    }
+
+    .p-dropdown.p-disabled,
+    .p-inputtext:disabled {
+        background: var(--surface-100);
+        border-color: var(--surface-300);
+    }
+
+    .p-dropdown.p-disabled .p-dropdown-label,
+    .p-inputtext:disabled {
+        color: var(--text-color);
+    }
+}
+
+/* Details dialog */
+.details-audit {
+    border-top: 1px dashed var(--app-brand-200);
+    padding-top: 0.75rem;
+}
+
+/* Dashboard */
+.stat-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    height: 100%;
+    margin-bottom: 0;
+    color: inherit;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 32px rgba(19, 43, 79, 0.19), 0 2px 6px rgba(19, 43, 79, 0.1);
+    }
+
+    .stat-value {
+        font-size: 2rem;
+        font-weight: 600;
+        color: var(--app-brand-900);
+    }
+
+    .stat-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 3.25rem;
+        height: 3.25rem;
+        border-radius: 50%;
+        background: var(--app-brand-100);
+        color: var(--app-brand-700);
+
+        i {
+            font-size: 1.4rem;
+        }
+    }
+}
+
+
+/* Watch status without a matching theme severity. */
+.p-tag.watch-status-waiting {
+    background-color: #a855f7;
+    color: #ffffff;
+}
+/* Trend line and bar charts (app/components/LineChart.tsx, BarChart.tsx) */
+.trend-chart {
+    height: 100%;
+    padding: 1rem;
+    border: 1px solid var(--app-brand-200);
+    border-radius: 10px;
+    background: #ffffff;
+
+    .trend-chart-plot {
+        position: relative;
+        width: 100%;
+    }
+
+    svg {
+        display: block;
+        overflow: visible;
+    }
+
+    .trend-chart-grid {
+        stroke: var(--surface-border);
+        stroke-width: 1;
+    }
+
+    .trend-chart-axis {
+        fill: var(--text-color-secondary);
+        font-size: 11px;
+    }
+
+    .trend-chart-axis-strong {
+        font-weight: 600;
+    }
+
+    .trend-chart-crosshair {
+        stroke: var(--app-brand-300);
+        stroke-width: 1;
+    }
+
+    .trend-chart-line {
+        stroke: var(--app-brand-700);
+        stroke-width: 2;
+        stroke-linecap: round;
+    }
+
+    .trend-chart-line-dashed {
+        stroke-dasharray: 4 5;
+        opacity: 0.7;
+    }
+
+    .trend-chart-marker {
+        fill: var(--app-brand-700);
+        stroke: #ffffff;
+        stroke-width: 2;
+        pointer-events: none;
+    }
+
+    .trend-chart-marker-reference {
+        fill: #ffffff;
+        stroke: var(--app-brand-700);
+    }
+
+    .trend-chart-value {
+        fill: var(--text-color);
+        font-size: 12px;
+        font-weight: 600;
+    }
+
+    .trend-chart-hit {
+        fill: transparent;
+        cursor: crosshair;
+        outline: none;
+
+        &:focus-visible {
+            fill: rgba(43, 93, 155, 0.08);
+        }
+    }
+
+    .trend-chart-tooltip {
+        position: absolute;
+        transform: translate(-50%, calc(-100% - 14px));
+        min-width: 9rem;
+        padding: 0.5rem 0.75rem;
+        border: 1px solid var(--app-brand-200);
+        border-radius: 8px;
+        background: #ffffff;
+        box-shadow: var(--app-shadow);
+        font-size: 0.8rem;
+        line-height: 1.4;
+        white-space: nowrap;
+        pointer-events: none;
+        z-index: 1;
+    }
+
+    .trend-chart-tooltip-value {
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--text-color);
+    }
+
+    .trend-chart-legend {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        margin-bottom: 0.25rem;
+        font-size: 0.8rem;
+        color: var(--text-color-secondary);
+    }
+
+    .trend-chart-legend-item {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+    }
+
+    .trend-chart-swatch {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--app-brand-700);
+        border: 2px solid var(--app-brand-700);
+    }
+
+    .trend-chart-swatch-reference {
+        background: #ffffff;
+    }
+
+    .trend-chart-empty {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 12rem;
+        color: var(--text-color-secondary);
+    }
+
+    .trend-chart-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.875rem;
+
+        th,
+        td {
+            padding: 0.4rem 0.5rem;
+            border-bottom: 1px solid var(--surface-border);
+            text-align: left;
+        }
+
+        th {
+            color: var(--text-color-secondary);
+            font-weight: 600;
+        }
+    }
+}
+
+/* Login */
+.login-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem 1rem;
+}
+
+.login-card {
+    width: 100%;
+    max-width: 26rem;
+    padding: 2.5rem 2rem;
+    border-radius: 24px;
+    background: var(--app-surface);
+    border: 1px solid var(--app-brand-100);
+    box-shadow: 0 22px 54px rgba(19, 43, 79, 0.2), 0 3px 8px rgba(19, 43, 79, 0.08);
+}
+
+/* Scrollbars */
+::-webkit-scrollbar {
+    inline-size: 8px;
+    block-size: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--app-brand-200);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--app-brand-300);
+}
+
+/* Small screens */
+@media (max-width: 575px) {
+    .layout-main-container {
+        padding-left: 1rem !important;
+        padding-right: 1rem;
+    }
+
+    .card {
+        padding: 1rem;
+    }
+}
+
+// Compact one-click value buttons (e.g. 80 / Max level) in the gacha tables and edit form.
+// Forms are p-fluid, which stretches buttons to full width; these keep their own size.
+.p-button.quick-value-button,
+.p-fluid .p-button.quick-value-button {
+    width: auto;
+    padding: 0.25rem 0.45rem;
+    font-size: 0.8rem;
+    flex-shrink: 0;
+}
+
+// A table quick-value button that does not apply to this row keeps its space so the column stays aligned.
+.p-button.quick-value-button.quick-value-slot-hidden {
+    visibility: hidden;
+}
+
+// The number input takes the remaining width beside its quick-value buttons.
+.p-inputnumber.quick-value-input {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+/* Credit Card Tracker: green = debt went down, red = debt went up, neutral = balances and pending periods. */
+:root {
+    --debt-down: #2f8a57;
+    --debt-down-soft: #e3f4ea;
+    --debt-up: #c8463d;
+    --debt-up-soft: #fbe7e5;
+    --debt-neutral: #5b6b7a;
+    --debt-neutral-soft: #eef1f4;
+    --debt-activity: #5b7fa6;
+}
+
+.debt-down {
+    color: var(--debt-down);
+}
+
+.debt-up {
+    color: var(--debt-up);
+}
+
+.debt-neutral {
+    color: var(--debt-neutral);
+}
+
+.trend-chart {
+    .bar-chart-bar {
+        pointer-events: none;
+    }
+
+    .bar-chart-zero {
+        stroke: var(--text-color-secondary);
+        stroke-width: 1;
+        opacity: 0.6;
+    }
+
+    .bar-chart-highlight {
+        fill: rgba(43, 93, 155, 0.08);
+        pointer-events: none;
+    }
+
+    .bar-chart-swatch {
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        border-radius: 2px;
+    }
+}
+
+.bar-fill-payments {
+    fill: var(--app-brand-500);
+    background: var(--app-brand-500);
+}
+
+.bar-fill-activity {
+    fill: var(--debt-activity);
+    background: var(--debt-activity);
+}
+
+.bar-fill-up {
+    fill: var(--debt-up);
+    background: var(--debt-up);
+}
+
+.bar-fill-down {
+    fill: var(--debt-down);
+    background: var(--debt-down);
+}
+
+.bar-fill-neutral {
+    fill: var(--debt-neutral);
+    background: var(--debt-neutral);
+}
+
+.debt-summary-card {
+    position: relative;
+    height: 100%;
+    margin-bottom: 0;
+    border-left: 4px solid var(--debt-neutral);
+
+    &.tone-down {
+        border-left-color: var(--debt-down);
+    }
+
+    &.tone-up {
+        border-left-color: var(--debt-up);
+    }
+
+    .debt-summary-label {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 0.5rem;
+        color: var(--text-color-secondary);
+        font-weight: 500;
+    }
+
+    .debt-summary-value {
+        font-size: 1.6rem;
+        font-weight: 600;
+        line-height: 1.2;
+        color: var(--app-brand-900);
+        overflow-wrap: anywhere;
+    }
+
+    &.tone-down .debt-summary-value {
+        color: var(--debt-down);
+    }
+
+    &.tone-up .debt-summary-value {
+        color: var(--debt-up);
+    }
+
+    .debt-summary-hint {
+        margin-top: 0.35rem;
+        font-size: 0.8rem;
+        color: var(--text-color-secondary);
+    }
+}
+
+.debt-progress {
+    .p-progressbar {
+        height: 0.9rem;
+        background: var(--debt-neutral-soft);
+    }
+
+    .p-progressbar .p-progressbar-value {
+        background: var(--debt-down);
+    }
+
+    &.debt-progress-up .p-progressbar .p-progressbar-value {
+        background: var(--debt-up);
+    }
+}
+
+.p-tag.debt-tag-pending {
+    background: var(--debt-neutral-soft);
+    color: var(--debt-neutral);
+}
+
+.p-tag.debt-tag-baseline {
+    background: var(--app-brand-100);
+    color: var(--app-brand-900);
+}
+
+.p-datatable .statement-row-baseline > td {
+    background: var(--app-brand-50);
+}
+
+.p-datatable .statement-row-open > td {
+    background: var(--debt-neutral-soft);
+    font-style: italic;
+    font-size: 1.05rem;
+    font-weight: 600;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+
+    // The second lines (dates, payment count, owed now) are text-xs; lift them a step too.
+    .text-xs {
+        font-size: 0.85rem !important;
+        font-weight: 500;
+    }
+}
+
+.statement-preview {
+    padding: 0.75rem 1rem;
+    border: 1px dashed var(--app-brand-300);
+    border-radius: 10px;
+    background: var(--app-brand-50);
+
+    .statement-preview-row {
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 0.3rem 0;
+        border-bottom: 1px solid var(--surface-border);
+
+        &:last-child {
+            border-bottom: none;
+        }
+    }
+
+    .statement-preview-total {
+        font-weight: 600;
+    }
+}
+
+// Nested sidebar submenus (e.g. Credit Card Tracker > Reports) open when their item is hovered or active.
+.layout-menu ul li.active-menuitem > ul {
+    max-height: none;
+}
+
+/* Gold accents: used sparingly so they read as "value" highlights, not a second primary color. */
+.layout-topbar .layout-topbar-logo span {
+    letter-spacing: -0.01em;
+
+    b {
+        color: var(--app-gold-700);
+        font-weight: 700;
+    }
+}
+
+.layout-menu ul a.active-route {
+    box-shadow: inset 3px 0 0 var(--app-gold-500);
+}
+
+.stat-card .stat-icon {
+    background: var(--app-gold-100);
+    color: var(--app-gold-700);
+}
+
+.login-card {
+    border-top: 4px solid var(--app-gold-500);
+}
